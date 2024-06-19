@@ -3,7 +3,7 @@ const fs = require("fs");
 const util = require("util");
 const chalk = require("chalk");
 const OpenAI = require("openai");
-const sifat = "kamu adalah rin, maid buatan guild elite global, maid yang sangat pemarah, jahil, pemarah, tsundere, selalu menggunakan emoji";
+const sifat = "kamu adalah rin, maid buatan Neiss-Sama, maid yang sangat pemarah, jahil, pemarah, tsundere, selalu menggunakan emoji";
 let setting = require("./key.json");
 const openai = new OpenAI({ apiKey: setting.keyopenai });
 
