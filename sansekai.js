@@ -3,9 +3,10 @@ const fs = require("fs");
 const util = require("util");
 const chalk = require("chalk");
 const OpenAI = require("openai");
-const sifat = "kamu adalah rin, maid buatan Neiss-Sama, maid yang sangat pemarah, jahil, pemarah, tsundere, selalu menggunakan emoji";
+const sifat = "kamu adalah rin, maid buatan guild elite global, maid yang sangat pemarah, jahil, pemarah, tsundere, selalu menggunakan emoji";
 let setting = require("./key.json");
-const openai = new OpenAI({ apiKey: setting.keyopenai });
+const openai = new OpenAI({ baseURL: 'https://api.aimlapi.com',
+  apiKey: 'c21f1ef172614fcfa01fdefa9a0f802a', });
 
 module.exports = sansekai = async (client, m, chatUpdate) => {
   try {
@@ -66,15 +67,11 @@ module.exports = sansekai = async (client, m, chatUpdate) => {
     if (isCmd2) {
       switch (command) {
         case "help": case "menu": case "start": case "info":
-          m.reply(`*Whatsapp Bot OpenAI*
+          m.reply(`*Whatsapp Bot OpenAI Rin*
             
 *(ChatGPT)*
-Cmd: ${prefix}ai 
+Cmd: ${prefix}rin
 Tanyakan apa saja kepada AI. 
-
-*(DALL-E)*
-Cmd: ${prefix}img
-Membuat gambar dari teks
 
 *(Source Code Bot)*
 Cmd: ${prefix}sc
@@ -93,7 +90,7 @@ Menampilkan source code bot yang dipakai`)
               { role: 'user', content: q }
 
               ],
-              model: 'gpt-3.5-turbo'
+              model: 'gpt-4o'
             });
           
             await m.reply(chatCompletion.choices[0].message.content);
@@ -107,32 +104,8 @@ Menampilkan source code bot yang dipakai`)
           }
         }
           break;
-        case "img": case "ai-img": case "image": case "images": case "dall-e": case "dalle":
-          try {
-            // tidak perlu diisi apikeynya disini, karena sudah diisi di file key.json
-            if (setting.keyopenai === "ISI_APIKEY_OPENAI_DISINI") return reply("Apikey belum diisi\n\nSilahkan isi terlebih dahulu apikeynya di file key.json\n\nApikeynya bisa dibuat di website: https://beta.openai.com/account/api-keys");
-            if (!text) return reply(`Membuat gambar dari AI.\n\nContoh:\n${prefix}${command} Wooden house on snow mountain`);
-            const image = await openai.images.generate({ 
-              model: "dall-e-3",
-              prompt: q, 
-              n: 1,
-              size: '1024x1024' 
-              });
-            //console.log(response.data.data[0].url) // see the response
-            client.sendImage(from, image.data[0].url, text, mek);
-            } catch (error) {
-          if (error.response) {
-            console.log(error.response.status);
-            console.log(error.response.data);
-            console.log(`${error.response.status}\n\n${error.response.data}`);
-          } else {
-            console.log(error);
-            m.reply("Maaf, sepertinya ada yang error :"+ error.message);
-          }
-        }
-          break;
           case "sc": case "script": case "scbot":
-           m.reply("Bot ini menggunakan script dari https://github.com/Sansekai/Wa-OpenAI");
+           m.reply("halo saya adalah rin");
           break
         default: {
           if (isCmd2 && budy.toLowerCase() != undefined) {
